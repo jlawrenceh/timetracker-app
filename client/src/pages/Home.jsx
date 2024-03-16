@@ -29,12 +29,12 @@ function Home() {
   return (
     <div>
       <h3>Home</h3>
-      <div>
+      <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
         {listOfProjects.map((project, key) => {
           return (
-            <>
-              {project.name}
-            </>
+            <div>
+              {project.id} | {project.name} | total hours: {project.totalHours}
+            </div>
           )
         })}
       </div>
