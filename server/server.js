@@ -15,6 +15,10 @@ app.get("/test", (req, res) => {
 const usersRouter = require("./routes/users");
 app.use("/users", usersRouter);
 
+const projectsRouter = require("./routes/projects");
+app.use("/projects", projectsRouter);
+
+
 
 db.sequelize.sync().then(() => {
     app.listen(3005, () => {
