@@ -6,7 +6,7 @@ const db = require("./models");
 
 
 app.use(express.json());
-
+app.use(cors());
 app.get("/test", (req, res) => {
     res.json("test ok");
 });
