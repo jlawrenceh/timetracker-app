@@ -7,6 +7,7 @@ import { AuthContext } from "./helpers/AuthContext";
 import Login from "./pages/Login"
 import Registration from "./pages/Registration";
 import Home from "./pages/Home";
+import Project from "./pages/Project";
 function App() {
   const [authState, setAuthState] = useState({ username: "", id: 0, status: false});
 
@@ -36,6 +37,7 @@ function App() {
             <Route path = "/" element={<Home/>}/>
             <Route path = "/login" element={<Login/>}/>
             <Route path = "/register" element={<Registration/>}/>
+            <Route path = "/project/:id" element={<Project/>}/>
           </Routes>
         </Router>
       </AuthContext.Provider>

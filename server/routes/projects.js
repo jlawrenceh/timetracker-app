@@ -10,15 +10,20 @@ router.post("/new", validateToken, async(req, res) => {
     await Projects.create(project);
     res.json(project);
 })
-/*
-router.get("/", validateToken, async(req, res) => {
-    const listOfProjects = await Projects.findAll({
-        where: { UserId: req.user.id }
-    });
-    res.json(listOfProjects);
-})
-*/
 
+router.get("/project/:id", validateToken, async(req, res) => {
+    const project = await Projects.findOne({
+        where: { id: req.params.id }
+    });
+    res.json(project);
+})
+
+router.get("/projectname/:id", validateToken, async(req, res) => {
+    const project = await Projects.findOne({
+        where: { id: req.params.id }
+    });
+    res.json(project.name);
+})
 
 router.get('/', validateToken,  async(req, res) => {
     const listOfProjects = await Projects.findAll({

@@ -9,6 +9,7 @@ function Home() {
 
   const [username, setUsername] = useState("");
   const [listOfProjects, setListOfProjects] = useState([]);
+  const [listOfTasks, setListOfTasks] = useState([]);
   const {authState} = useContext(AuthContext);
 //authstate.id
   console.log("HOME authState: ", authState);
@@ -23,9 +24,10 @@ function Home() {
       }).then((response) => {
         setListOfProjects(response.data);
       })
+
   }, []);
   
-
+ 
   return (
     <div>
       <h3>Home</h3>
@@ -33,7 +35,9 @@ function Home() {
         {listOfProjects.map((project, key) => {
           return (
             <div>
-              {project.id} | {project.name} | total hours: {project.totalHours}
+              {project.id} | {project.name} | total hours: {project.totalHours}  
+              | <button onClick={ () => navigate(`/project/${project.id}`)}> View</button>
+
             </div>
           )
         })}
