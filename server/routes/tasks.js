@@ -19,8 +19,17 @@ router.get("/byProjectId/:projectId", validateToken, async(req, res) => {
     res.json(listOfTasks);
 })
 
+router.delete("/:taskId", validateToken, async(req, res) => {
+    const taskId = req.params.taskId
 
+    await Tasks.destroy({
+        where: {
+            id: taskId,
+        },
+    });
 
+    res.json("Deleted Succesfully");
+})
 
 
 
