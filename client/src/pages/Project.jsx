@@ -62,6 +62,98 @@ function Project() {
         })
     }
 
+    const editTask = (option, taskid) => {
+        if(option === "taskname"){
+       
+            let newtaskname = prompt("Enter new taskname:");
+
+            if (newtaskname!==null){
+                axios.put("http://localhost:3005/tasks/edit/taskname", 
+                    { 
+                        taskname: newtaskname,
+                        id: taskid
+                    }, 
+                    {
+                        headers: {
+                            accessToken: localStorage.getItem("accessToken"),
+                        }
+                    }
+                ).then((response) => {
+                    alert(response.data);
+                })
+                setTasks(
+                    tasks.map((task) => {
+                        if (task.id === taskid) {
+                            return { ...task, taskname: newtaskname };
+                        }
+                        return task;
+                    })
+                )
+            }
+        } 
+        else if(option === "description") {
+            let newdescription = prompt("Enter new description:");
+            if (newdescription!==null){
+                axios.put("http://localhost:3005/tasks/edit/description", 
+                    { 
+                        description: newdescription,
+                        id: taskid
+                    }, 
+                    {
+                        headers: {
+                            accessToken: localStorage.getItem("accessToken"),
+                        }
+                    }
+                ).then((response) => {
+                    alert(response.data);
+                })
+                setTasks(
+                    tasks.map((task) => {
+                        if (task.id === taskid) {
+                            return { ...task, description: newdescription };
+                        }
+                        return task;
+                    })
+                )
+            }
+        } else {
+            let newhours = prompt("Enter new hours:");
+            if (newhours!==null){
+                newhours = parseInt(newhours);
+                if (!isNaN(newhours)) {
+                    axios.put("http://localhost:3005/tasks/edit/hours", 
+                        { 
+                            hours: newhours,
+                            id: taskid
+                        },
+                        {
+                            headers: {
+                                accessToken: localStorage.getItem("accessToken"),
+                            }
+                        }
+                    ).then((response) => {
+                        alert(response.data);
+                    })
+                    setTasks(
+                        tasks.map((task) => {
+                            if (task.id === taskid) {
+                                return { ...task, hours: newhours };
+                            }
+                            return task;
+                        })
+                    )
+
+                    tasks.forEach((task) => {
+                        if(task.id === taskid){
+                            setTotalHours(totalHours - task.hours);
+                            setTotalHours(totalHours + newhours);
+                        }
+                    })
+                }
+            }
+        }
+}
+
     const deleteTask = (taskId) => {
 
         tasks.forEach((task) => {
@@ -98,19 +190,19 @@ function Project() {
                 <>
                     <div className="task_object">
                         <div className="task_object_header">
-                            <div>
-                                {task.id} {task.taskname}  
+                            <div className="clickable" onClick={() => editTask("taskname", task.id)}>
+                               <h3> {task.taskname}  </h3>
                             </div>  
                             <div>
                             <button onClick={() => deleteTask(task.id)}>x</button> 
                             </div>
                         </div> 
                         
-                        <div>  
+                        <div className="clickable" onClick={() => editTask("description", task.id)}>  
                             <label>description:</label>  
                             {task.description} 
                         </div>
-                        <div>
+                        <div className="clickable" onClick={() => editTask("hours", task.id)}>
                             <label> hours:</label>  
                             {task.hours}  
                         </div>
