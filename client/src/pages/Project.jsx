@@ -64,7 +64,11 @@ function Project() {
 
     const deleteTask = (taskId) => {
 
-        setTotalHours(totalHours - tasks[taskId - 1].hours);
+        tasks.forEach((task) => {
+            if(task.id === taskId){
+                setTotalHours(totalHours - task.hours);
+            }
+        })
         axios.delete(`http://localhost:3005/tasks/delete/${taskId}`, {
             headers: {
                 accessToken: localStorage.getItem("accessToken"),

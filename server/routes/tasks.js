@@ -31,6 +31,30 @@ router.delete("/delete/:taskId", validateToken, async(req, res) => {
     res.json("Deleted Succesfully");
 })
 
+router.put("/edit/hours", validateToken, async (req, res) => {
+    const {newhours, id } = req.body;
+    await Tasks.update({hours: newhours}, {where: {id: id}});
+    res.json("hours updated Succesfully");
+});
+
+router.put("/edit/taskname", validateToken, async (req, res) => {
+    const {newtaskname, id } = req.body;
+    await Tasks.update({taskname: newtaskname}, {where: {id: id}});
+    res.json("task name updated Succesfully");
+});
+
+router.put("/edit/description", validateToken, async (req, res) => {
+    const {newdescription, id } = req.body;
+    await Tasks.update({description: newdescription}, {where: {id: id}});
+    res.json("description updated Succesfully");
+});
+
+
+
+
+
+
+
 
 
 module.exports = router;
