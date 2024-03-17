@@ -46,7 +46,6 @@ function Project() {
    
 
     const addTask = () => {
-
         setTotalHours(totalHours + parseInt(newTask.hours));
 
         axios.post("http://localhost:3005/tasks/new", newTask, {
@@ -59,6 +58,22 @@ function Project() {
                 setNewTask({taskname: "", description: "", hours: 0, ProjectId: id});
                 console.log(response.data);
             }
+        })
+    }
+
+    const deleteTask = (taskId) => {
+
+        setTotalHours(totalHours - tasks[taskId - 1].hours);
+        axios.delete(`http://localhost:3005/tasks/delete/${taskId}`, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken"),
+            }
+        }).then(() => {
+            setTasks(
+                tasks.filter((task) => {
+                    return task.id !== taskId;
+                })
+            );
         })
     }
   return (
@@ -77,7 +92,8 @@ function Project() {
             return (
                 <>
                     <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-                        <span> <button>X</button> task : {task.taskname}  </span>
+                        <span> <button onClick={() => deleteTask(task.id)}>X</button> task : {task.taskname}  </span>
+                        <span> {task.id}</span>
                         <span>  description:  {task.description} </span>
                         <span>  number of hours:  {task.hours}  </span>
                         <span> --------------------------------------------</span>
