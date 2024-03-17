@@ -11,6 +11,12 @@ function Login() {
 
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if(authState.status)
+    {
+      navigate("/");
+    }
+  })
   const login = () => {
 
     const data = { username: username, password: password };
@@ -28,6 +34,7 @@ function Login() {
 
         console.log(response.data);
         console.log("login success");
+        navigate("/");
       }
     });
   };

@@ -50,5 +50,14 @@ router.get('/', validateToken,  async(req, res) => {
     res.json(projectsWithTotalHours);
  });
 
+ router.delete("/delete/:projectId", validateToken, async(req, res) => {
+     const projectId = req.params.projectId
+     await Projects.destroy({
+         where: {
+             id: projectId,
+         },
+     });
+     res.json("Deleted Succesfully");
+ })
 
 module.exports = router;

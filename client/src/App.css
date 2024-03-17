@@ -2,7 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  
 }
 
 .logo {
@@ -39,4 +39,83 @@
 
 .read-the-docs {
   color: #888;
+}
+
+header{
+  width: 100%;
+}
+
+.home {
+  max-width: 968px !important;
+}
+.navbar{
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+.new_project_wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.new_project_wrapper input{
+  width: 70%;
+}
+
+.new_project_wrapper button{
+  margin-left: 1rem;
+  
+}
+
+.new_task_wrapper{
+  display: flex;
+  gap: 1rem;
+}
+
+
+.projects_container{
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.project_object,
+.task_object{
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid #5a5a5a;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  text-wrap: wrap;
+}
+
+.project_object{
+  width: 13rem;
+}
+
+.field_name{
+  width: 9.5rem;
+}
+
+.field_description{
+  width: 12rem;
+}
+
+.field_hours{
+  width: 3rem;
+}
+
+.task_object_header{
+  display: flex;
+  justify-content: space-between;
+}
+
+label{
+  margin-right: 0.5rem;
 }

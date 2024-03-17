@@ -17,6 +17,7 @@ function Project() {
         hours: 0,
         ProjectId : id
     });
+
     useEffect(() => {
 
         axios.get(`http://localhost:3005/tasks/byProjectId/${id}`, {
@@ -81,22 +82,35 @@ function Project() {
     <div>
         <h3>Project: {projectName} </h3>
         <h3>total hours : {totalHours} </h3>
-        <div>
-                <input type="text" placeholder="task name" onChange={(e) => setNewTask({...newTask, taskname: e.target.value})} />
-                <input type="text" placeholder="description" onChange={(e) => setNewTask({...newTask, description: e.target.value})}/>
-                <input type="number" placeholder="hours" onChange={(e)=> setNewTask({...newTask, hours: e.target.value})} />
+        <div className="new_task_wrapper">
+                <input type="text" className="field_name" placeholder="task name" value={newTask.taskname} onChange={(e) => setNewTask({...newTask, taskname: e.target.value})} />
+                <input type="text" className="field_description" placeholder="description" value={newTask.description} onChange={(e) => setNewTask({...newTask, description: e.target.value})}/>
+                <input type="number" className="field_hours" placeholder="hours" min="0" value={newTask.hours} onChange={(e)=> setNewTask({...newTask, hours: e.target.value})} />
                 <button onClick={addTask}>Add Task</button>
         </div>
 
         {tasks.map((task, key) => {
             return (
                 <>
-                    <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-                        <span> <button onClick={() => deleteTask(task.id)}>X</button> task : {task.taskname}  </span>
-                        <span> {task.id}</span>
-                        <span>  description:  {task.description} </span>
-                        <span>  number of hours:  {task.hours}  </span>
-                        <span> --------------------------------------------</span>
+                    <div className="task_object">
+                        <div className="task_object_header">
+                            <div>
+                                {task.id} {task.taskname}  
+                            </div>  
+                            <div>
+                            <button onClick={() => deleteTask(task.id)}>x</button> 
+                            </div>
+                        </div> 
+                        
+                        <div>  
+                            <label>description:</label>  
+                            {task.description} 
+                        </div>
+                        <div>
+                            <label> hours:</label>  
+                            {task.hours}  
+                        </div>
+                        
                     </div>
                 </>
             )

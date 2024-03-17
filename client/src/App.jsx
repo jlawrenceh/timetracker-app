@@ -29,16 +29,41 @@ function App() {
     })
   }, [])
 
+  const logOut = () => {
+    localStorage.removeItem("accessToken");
+    setAuthState({...authState, status: false});
+    window.location.reload();
+    
+  }
+
   return (
     <>
       <AuthContext.Provider value={{ authState, setAuthState }}>
+
         <Router>
+        <header>
+          <div className="navbar container">
+            {authState.status ? (
+            <>
+              <Link to="/">Home</Link>
+              <button onClick={logOut}>logout</button>
+            </>
+            ) : (
+            <>
+              <Link to="/login">login</Link>
+              <Link to="/register">register</Link>
+            </>
+            )}
+          </div >
+        </header>
+        <div className="content container" >
           <Routes>
             <Route path = "/" element={<Home/>}/>
             <Route path = "/login" element={<Login/>}/>
             <Route path = "/register" element={<Registration/>}/>
             <Route path = "/project/:id" element={<Project/>}/>
           </Routes>
+          </div>
         </Router>
       </AuthContext.Provider>
     </>
